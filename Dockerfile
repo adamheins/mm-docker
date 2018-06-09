@@ -47,7 +47,7 @@ RUN apt-get install -y\
 RUN apt-get install -y ros-indigo-desktop-full
 
 # Additional development tools
-RUN apt-get install -y x11-apps python-pip build-essential
+RUN apt-get install -y x11-apps build-essential
 RUN pip install catkin_tools
 
 # Thing dependencies.
