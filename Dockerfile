@@ -9,7 +9,7 @@ ARG shell
 
 # Basic Utilities
 RUN apt-get -y update
-RUN apt-get install -y zsh curl screen tree sudo ssh synaptic vim
+RUN apt-get install -y zsh curl screen tree sudo ssh synaptic vim renameutils
 
 # Python.
 RUN apt-get install -y python-dev python-pip python3-dev python3-pip
@@ -47,7 +47,7 @@ RUN apt-get install -y\
 RUN apt-get install -y ros-indigo-desktop-full
 
 # Additional development tools
-RUN apt-get install -y x11-apps build-essential
+RUN apt-get install -y x11-apps build-essential gfortran
 RUN pip install catkin_tools
 
 # Thing dependencies.
