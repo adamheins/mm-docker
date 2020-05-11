@@ -6,11 +6,7 @@ if ! [ -f image_name.txt ]; then
   exit 1
 fi
 
-# Get this script's path
-pushd `dirname $0` > /dev/null
-SCRIPTPATH=`pwd`
-popd > /dev/null
-
+# exit immediately if any commands fail
 set -e
 
 # Run the container with shared X11 (i.e. we can run GUI programs from within

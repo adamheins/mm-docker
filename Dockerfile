@@ -48,7 +48,7 @@ RUN apt-get install -y ros-indigo-desktop-full
 
 # Additional development tools
 RUN apt-get install -y x11-apps build-essential gfortran
-RUN pip install catkin_tools
+RUN pip install catkin_tools numpy sympy pytest
 
 # Thing dependencies.
 RUN apt-get install -y \
