@@ -24,11 +24,13 @@ This used to require installing a separate package `nvidia-docker2`, but Docker
 now supports NVIDIA natively since version 19.03.
 
 ## macOS
+
 It is not immediately obvious how to get this working on a Mac. There are
 definitely some differences from Linux, and [this post](http://qr.ae/TUTszl)
 may provide a reasonable starting point.
 
 ## Usage
+
 * The name of your image must be in a file called `image_name.txt`.
 * `build-image.sh` builds the image named in `image_name.txt`, following the
   directions laid out in the `Dockerfile`. You need to run this to initially
@@ -38,7 +40,22 @@ may provide a reasonable starting point.
 * `restart-container.sh` restarts an existing container that has been stopped.
 * `attach-to-container.sh` attaches to an already-running container.
 
+## Sourcing ROS
+
+You may now be using multiple ROS versions on the same computer: Indigo with
+this Docker image and another for your actual Ubuntu version. You can add
+something like the following to your .bashrc to choose the right one:
+```bash
+# for example, with ROS kinetic on my base system
+if [ -d /opt/ros/kinetic ]; then
+  source /opt/ros/kinetic/setup.zsh
+elif [ -d /opt/ros/indigo ]; then
+  source /opt/ros/indigo/setup.zsh
+fi
+```
+
 ## Useful Docker Commands
+
 * `docker ps`: List running containers. If you see your container running here,
   you can attach to it.
 * `docker ps -a`: List all containers (running and stopped).
