@@ -19,15 +19,19 @@ RUN pip3 install --upgrade pip
 RUN apt-get install -y x11-apps build-essential
 RUN pip install catkin_tools numpy
 
+# mm dependencies
+RUN apt-get install -y ros-indigo-soem ros-indigo-ur-modern-driver libeigen3-dev
+
+# Symlink Eigen.
+RUN ln -s /usr/include/eigen3/Eigen /usr/include/Eigen
+
 # Thing dependencies.
 RUN apt-get install -y \
-  ros-indigo-soem ros-indigo-ros-control ros-indigo-socketcan-interface \
+  ros-indigo-ros-control ros-indigo-socketcan-interface \
   ros-indigo-moveit ros-indigo-ur-modern-driver ros-indigo-geometry2 \
   ros-indigo-robot-localization ros-indigo-hector-gazebo \
-  ros-indigo-gazebo-ros-control libeigen3-dev
+  ros-indigo-gazebo-ros-control
 
-# Make symlinks to find header files.
-RUN ln -s /usr/include/eigen3/Eigen /usr/include/Eigen
 RUN ln -s /usr/include/gazebo-2.2/gazebo /usr/include/gazebo
 RUN ln -s /usr/include/sdformat-1.4/sdf /usr/include/sdf
 
