@@ -1,29 +1,32 @@
 # rosdocked
 
-Run ROS Indigo / Ubuntu Trusty within Docker on Ubuntu Xenial or on any
-platform with a shared username, home directory, and X11.
+Originally forked from [here](https://github.com/jbohren/rosdocked), this fork
+is specifically designed for running UTIAS mobile manipulator code.
 
-This enables you to build and run a persistent ROS Indigo workspace as long as
-you can run Docker images.
+Run Ubuntu 14.04 with ROS Indigo with a shared username, home directory, and
+X11 graphics on a computer with a different Ubuntu version. Requires
+[Docker](https://docs.docker.com/engine/installation/linux/ubuntulinux/):
+```
+sudo apt install docker-ce
+```
 
 Note that any changes made outside of your home directory from within the
 Docker environment will not persist. If you want to add additional binary
 packages without having to reinstall them each time, add them to the Dockerfile
 and rebuild.
 
-For more info on Docker see here:
-https://docs.docker.com/engine/installation/linux/ubuntulinux/
+## NVIDIA
 
-## A Note on macOS
+If your laptop has an NVIDIA graphics card, you'll need to use the `nvidia`
+branch. That branch includes NVIDIA support by leveraging [this
+Dockerfile](https://hub.docker.com/r/lindwaltz/ros-indigo-desktop-full-nvidia/).
+This used to require installing a separate package `nvidia-docker2`, but Docker
+now supports NVIDIA natively since version 19.03.
+
+## macOS
 It is not immediately obvious how to get this working on a Mac. There are
 definitely some differences from Linux, and [this post](http://qr.ae/TUTszl)
 may provide a reasonable starting point.
-
-## Thing
-
-This is a fork specifically designed for running the
-[Thing](https://github.com/utiasSTARS/thing) robot manipulator code. The
-original repository may be found [here](https://github.com/jbohren/rosdocked).
 
 ## Usage
 * The name of your image must be in a file called `image_name.txt`.
