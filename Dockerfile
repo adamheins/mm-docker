@@ -1,4 +1,4 @@
-FROM osrf/ros:indigo-desktop-full
+FROM lindwaltz/ros-indigo-desktop-full-nvidia
 
 # Arguments
 ARG user
@@ -18,6 +18,11 @@ RUN pip3 install --upgrade pip
 # Additional development tools
 RUN apt-get install -y x11-apps build-essential
 RUN pip install catkin_tools numpy
+
+# Update the ROS key. I suspect this may have to do with lindwaltz's dockerfile
+# removing all of the apt repos.
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F42ED6FBAB17C654
+RUN apt-get update
 
 # mm dependencies
 RUN apt-get install -y ros-indigo-soem ros-indigo-ur-modern-driver libeigen3-dev

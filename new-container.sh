@@ -21,6 +21,7 @@ set -e
 # Good luck.
 docker run\
   --net=host\
+  --runtime=nvidia\
   -e SHELL\
   -e DISPLAY\
   -e DOCKER=1\
