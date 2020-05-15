@@ -1,4 +1,4 @@
-# rosdocked
+# mm-docker
 
 Originally forked from [here](https://github.com/jbohren/rosdocked), this fork
 is specifically designed for running UTIAS mobile manipulator code.
