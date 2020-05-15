@@ -31,14 +31,18 @@ may provide a reasonable starting point.
 
 ## Usage
 
-* The name of your image must be in a file called `image_name.txt`.
-* `build-image.sh` builds the image named in `image_name.txt`, following the
-  directions laid out in the `Dockerfile`. You need to run this to initially
-  build the image and rebuild it if you make changes to the Dockerfile.
-* `new-container.sh` creates a new container from the latest image and
-  automatically attaches to it. The container shares your home directory.
-* `restart-container.sh` restarts an existing container that has been stopped.
-* `attach-to-container.sh` attaches to an already-running container.
+1. The name of your image must be in a file called `image_name.txt`.
+2. Run `build-image.sh` to build your image, based on the provided Dockerfile.
+   This only needs to be done once unless you make changes to the Dockerfile.
+3. Run `new-container.sh` to create a container from your built image. This
+   only needs to be done once unless you wish to reset the environment of the
+   container. This script will also automatically enter the newly created
+   container.
+4. If an existing container has been stopped (e.g., if you restarted your
+   computer), run `restart-container.sh` to restart it. This does **not**
+   automatically enter the newly created container; to do this, run
+   `attach-to-container.sh`. You can also run `attach-to-container.sh` from any
+   new terminal sessions to attach to the same running container.
 
 ## Sourcing ROS
 
