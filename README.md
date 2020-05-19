@@ -1,5 +1,8 @@
 # mm-docker
 
+**Note:** Always refer to the README in the master branch from the most
+up-to-date information.
+
 Originally forked from [here](https://github.com/jbohren/rosdocked), this fork
 is specifically designed for running UTIAS mobile manipulator code.
 
