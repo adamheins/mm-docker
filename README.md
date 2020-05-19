@@ -20,8 +20,14 @@ and rebuild.
 If your laptop has an NVIDIA graphics card, you'll need to use the `nvidia`
 branch. That branch includes NVIDIA support by leveraging [this
 Dockerfile](https://hub.docker.com/r/lindwaltz/ros-indigo-desktop-full-nvidia/).
+
 This used to require installing a separate package `nvidia-docker2`, but Docker
-now supports NVIDIA natively since version 19.03.
+now supports NVIDIA natively since version 19.03. However, you still need to
+install the
+[nvidia-container-runtime](https://github.com/NVIDIA/nvidia-container-runtime):
+1. Add the repository by following [these instructions](https://nvidia.github.io/nvidia-container-runtime/).
+2. Install: `sudo apt install nvidia-container-runtime`.
+3. Add the runtime to docker: `sudo dockerd --add-runtime=nvidia=/usr/bin/nvidia-container-runtime`
 
 ## macOS
 
