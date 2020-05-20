@@ -83,12 +83,7 @@ code prepend `(D)` to your shell prompt, and should work for both bash and zsh.
 Add the following to the end of your `.bashrc` (or `.zshrc` if using zsh), or
 anywhere after the `$PS1` variable is created:
 ```bash
-# check if you're in a docker container
-has_docker=""
 if [ -f /.dockerenv ]; then
-  has_docker="(D)"
+  PS1="(D)$PS1"
 fi
-
-# append to the prompt
-PS1="$has_docker$PS1"
 ```
