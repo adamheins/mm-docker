@@ -73,3 +73,22 @@ fi
   you can attach to it.
 * `docker ps -a`: List all containers (running and stopped).
 * `docker images`: List docker images.
+
+## Modified Shell Prompt
+
+It can be hard to tell if your terminal is currently in a docker container. One
+convenient way to do this is to change your prompt. The following pieces of
+code prepend `(D)` to your shell prompt, and should work for both bash and zsh.
+
+Add the following to the end of your `.bashrc` (or `.zshrc` if using zsh), or
+anywhere after the `$PS1` variable is created:
+```bash
+# check if you're in a docker container
+has_docker=""
+if [ -f /.dockerenv ]; then
+  has_docker="(D)"
+fi
+
+# append to the prompt
+PS1="$has_docker$PS1"
+```
