@@ -19,6 +19,7 @@ RUN pip3 install --upgrade pip
 RUN apt-get install -y x11-apps build-essential
 RUN pip install catkin_tools numpy
 
+
 # mm dependencies
 RUN apt-get install -y ros-indigo-soem ros-indigo-ur-modern-driver libeigen3-dev
 
@@ -34,6 +35,18 @@ RUN apt-get install -y \
 
 RUN ln -s /usr/include/gazebo-2.2/gazebo /usr/include/gazebo
 RUN ln -s /usr/include/sdformat-1.4/sdf /usr/include/sdf
+
+# Install ffmpeg to play sound.
+RUN apt-get install -y software-properties-common
+RUN add-apt-repository -y ppa:mc3man/trusty-media
+RUN apt-get update
+RUN apt-get install -y ffmpeg
+
+# pydub for playing audio from Python
+RUN pip install pydub
+
+# Allow user to access sound devices
+RUN usermod -a -G audio "${user}"
 
 # Make SSH available
 EXPOSE 22
