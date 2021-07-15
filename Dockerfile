@@ -1,7 +1,8 @@
-FROM osrf/ros:indigo-desktop-full
+FROM osrf/ros:noetic-desktop-full
 
 # Arguments
 ARG user
+ARG pass
 ARG uid
 ARG home
 ARG shell
@@ -11,29 +12,17 @@ RUN apt-get -y update
 RUN apt-get install -y git zsh curl screen tree sudo ssh synaptic vim
 
 # Python.
-RUN apt-get install -y python-dev python-pip python3-dev python3-pip
-RUN pip install --upgrade pip
+RUN apt-get install -y python-dev python3-dev python3-pip
 RUN pip3 install --upgrade pip
 
 # Additional development tools
 RUN apt-get install -y x11-apps build-essential
-RUN pip install catkin_tools numpy
 
-# mm dependencies
-RUN apt-get install -y ros-indigo-soem ros-indigo-ur-modern-driver libeigen3-dev
+# OCS2 dependencies
+RUN apt-get install -y libeigen3-dev libglpk-dev python3-catkin-tools python3-osrf-pycommon ros-noetic-pybind11-catkin
 
-# Symlink Eigen.
-RUN ln -s /usr/include/eigen3/Eigen /usr/include/Eigen
-
-# Thing dependencies.
-RUN apt-get install -y \
-  ros-indigo-ros-control ros-indigo-socketcan-interface \
-  ros-indigo-moveit ros-indigo-ur-modern-driver ros-indigo-geometry2 \
-  ros-indigo-robot-localization ros-indigo-hector-gazebo \
-  ros-indigo-gazebo-ros-control
-
-RUN ln -s /usr/include/gazebo-2.2/gazebo /usr/include/gazebo
-RUN ln -s /usr/include/sdformat-1.4/sdf /usr/include/sdf
+# needed for some of the OCS2 examples
+# RUN apt-get install -y gnome-terminal
 
 # Make SSH available
 EXPOSE 22
@@ -42,11 +31,15 @@ EXPOSE 22
 VOLUME "${home}"
 
 # Clone user into docker image and set up X11 sharing
+# TODO for some reason can't get sudo access on the non-root user
 RUN \
   echo "${user}:x:${uid}:${uid}:${user},,,:${home}:${shell}" >> /etc/passwd && \
   echo "${user}:x:${uid}:" >> /etc/group && \
   echo "${user} ALL=(ALL) NOPASSWD: ALL" > "/etc/sudoers.d/${user}" && \
   chmod 0440 "/etc/sudoers.d/${user}"
+
+# this is seemingly needed to allow the user to use sudo
+RUN echo "${user}:${pass}" | chpasswd
 
 # Switch to user
 USER "${user}"
