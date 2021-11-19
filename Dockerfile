@@ -9,7 +9,7 @@ ARG shell
 
 # Basic Utilities
 RUN apt-get -y update
-RUN apt-get install -y git zsh curl screen tree sudo ssh synaptic vim
+RUN apt-get install -y git zsh curl screen tree sudo ssh synaptic vim apt-utils ripgrep
 
 # Python.
 RUN apt-get install -y python-dev python3-dev python3-pip
@@ -22,6 +22,11 @@ RUN apt-get install -y x11-apps build-essential
 RUN apt-get install -y libeigen3-dev libglpk-dev python3-catkin-tools python3-osrf-pycommon ros-noetic-pybind11-catkin
 
 # needed for some of the OCS2 examples
+RUN apt-get install -y expect
+
+# TODO: needs to be done manually for now
+#   ideally, I'd remove the gnome-terminal dependency completely (it came with
+#   the OCS2 mobile manipulator example)
 # RUN apt-get install -y gnome-terminal
 
 # Make SSH available
