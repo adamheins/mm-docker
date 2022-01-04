@@ -27,6 +27,8 @@ docker run\
   -e TERM\
   --privileged\
   --device /dev/dri\
+  --ulimit rtprio=99\
+  --cap-add=sys_nice\
   -v "/dev/bus/usb:/dev/bus/usb"\
   -v "$HOME:$HOME:rw"\
   -v "/tmp/.X11-unix:/tmp/.X11-unix:rw"\

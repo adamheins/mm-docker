@@ -8,8 +8,7 @@ ARG home
 ARG shell
 
 # Basic Utilities
-RUN apt-get -y update
-RUN apt-get install -y git zsh curl screen tree sudo ssh synaptic vim apt-utils ripgrep
+RUN apt-get update && apt-get install -y zsh curl screen tree sudo ssh synaptic vim apt-utils ripgrep
 
 # Python.
 RUN apt-get install -y python-dev python3-dev python3-pip
@@ -19,7 +18,7 @@ RUN pip3 install --upgrade pip
 RUN apt-get install -y x11-apps build-essential
 
 # OCS2 dependencies
-RUN apt-get install -y libeigen3-dev libglpk-dev python3-catkin-tools python3-osrf-pycommon ros-noetic-pybind11-catkin
+RUN apt-get install -y libeigen3-dev libglpk-dev python3-catkin-tools python3-osrf-pycommon ros-noetic-pybind11-catkin python3-tk
 
 # needed for some of the OCS2 examples
 RUN apt-get install -y expect
