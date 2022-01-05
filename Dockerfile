@@ -8,7 +8,7 @@ ARG home
 ARG shell
 
 # Basic Utilities
-RUN apt-get update && apt-get install -y zsh curl screen tree sudo ssh synaptic vim apt-utils ripgrep
+RUN apt-get update && apt-get install -y git zsh curl screen tree sudo ssh synaptic vim apt-utils ripgrep
 
 # Python.
 RUN apt-get install -y python-dev python3-dev python3-pip
