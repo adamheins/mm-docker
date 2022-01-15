@@ -62,6 +62,13 @@ RUN ln -s /usr/include/eigen3/Eigen /usr/include/Eigen
 RUN ln -s /usr/include/gazebo-2.2/gazebo /usr/include/gazebo
 RUN ln -s /usr/include/sdformat-1.4/sdf /usr/include/sdf
 
+# Install newer compilers (for CppADCodeGen)
+RUN add-apt-repository ppa:ubuntu-toolchain-r/test
+RUN apt-get update
+RUN apt-get install gcc-5 g++-5
+
+RUN apt-get install cmake3
+
 # Gaussian process package.
 RUN pip install GPy
 
