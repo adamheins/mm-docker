@@ -2,21 +2,21 @@ FROM osrf/ros:noetic-desktop-full
 
 # Arguments
 ARG user
+ARG pass
 ARG uid
 ARG home
 ARG shell
 
 # Basic Utilities
-RUN apt-get -y update
-RUN apt-get install -y git zsh curl screen tree sudo ssh synaptic vim udev iputils-ping
+RUN apt -y update
+RUN apt install -y git zsh curl screen tree sudo ssh synaptic vim udev iputils-ping ripgrep
 
 # Python
 RUN apt-get install -y python3-dev python3-pip
 RUN python3 -m pip install --upgrade pip
 
 # Additional development tools
-RUN apt-get install -y x11-apps build-essential
-RUN pip install catkin_tools numpy
+RUN apt install -y x11-apps build-essential
 
 # Just for kitty terminal
 RUN apt install kitty-terminfo
@@ -28,8 +28,19 @@ ros-noetic-image-transport ros-noetic-image-publisher libgoogle-glog-dev libusb-
 ros-noetic-diagnostic-updater ros-noetic-diagnostic-msgs \
 libdw-dev
 
+# OCS2 dependencies
+RUN apt install -y libeigen3-dev libglpk-dev python3-catkin-tools python3-osrf-pycommon ros-noetic-pybind11-catkin python3-tk
+
 # Other dependencies
 RUN apt install -y ros-noetic-eigenpy ros-noetic-pybind11-catkin ros-noetic-moveit libglpk-dev ros-noetic-soem ros-noetic-socketcan-interface
+
+# needed for some of the OCS2 examples
+RUN apt-get install -y expect
+
+# TODO: needs to be done manually for now
+#   ideally, I'd remove the gnome-terminal dependency completely (it came with
+#   the OCS2 mobile manipulator example)
+# RUN apt-get install -y gnome-terminal
 
 # Make SSH available
 EXPOSE 22
@@ -38,6 +49,7 @@ EXPOSE 22
 VOLUME "${home}"
 
 # Clone user into docker image and set up X11 sharing
+# TODO for some reason can't get sudo access on the non-root user
 RUN \
   echo "${user}:x:${uid}:${uid}:${user},,,:${home}:${shell}" >> /etc/passwd && \
   echo "${user}:x:${uid}:" >> /etc/group && \

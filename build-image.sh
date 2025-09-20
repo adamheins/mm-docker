@@ -15,6 +15,7 @@ fi
 # Build the docker image
 docker build\
   --build-arg user=$USER\
+  --build-arg pass="foo"\
   --build-arg uid=$UID\
   --build-arg home=$HOME\
   --build-arg shell=$SHELL\
