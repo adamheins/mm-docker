@@ -30,4 +30,9 @@ docker run\
   -v "/dev/bus/usb:/dev/bus/usb"\
   -v "$HOME:$HOME:rw"\
   -v "/tmp/.X11-unix:/tmp/.X11-unix:rw"\
+  --gpus all\
+  -e NVIDIA_DRIVER_CAPABILITIES=all\
+  -e NVIDIA_VISIBLE_DEVICES=all\
+  --runtime=nvidia\
+  --add-host=cpr-tor11-01:192.168.131.1\
   -it $(cat image_name.txt) $SHELL
